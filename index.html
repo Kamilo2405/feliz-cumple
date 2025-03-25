@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background: linear-gradient(45deg, #ffcc00, #ff6699);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+        .message {
+            font-size: 60px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 3px 3px 15px rgba(0,0,0,0.5);
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+        .sub-message {
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+            margin-top: 10px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .balloons {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+        .balloon {
+            width: 50px;
+            height: 70px;
+            background-color: yellow;
+            border-radius: 50%;
+            position: relative;
+            animation: floatUp 5s linear infinite;
+            text-align: center;
+            font-size: 30px;
+        }
+        .balloon:nth-child(1)::before { content: "💛"; }
+        .balloon:nth-child(2)::before { content: "💛"; animation-delay: 1s; }
+        .balloon:nth-child(3)::before { content: "💛"; animation-delay: 2s; }
+        @keyframes floatUp {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(-300px); opacity: 0; }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: gold;
+            opacity: 0.7;
+            animation: fall 3s linear infinite;
+        }
+        @keyframes fall {
+            from { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            to { transform: translateY(500px) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">Feliz cumpleñito mimol 💛🎉💛</div>
+    <div class="sub-message">Te quiero como una vaquita muchooooooo 🐮💛</div>
+    <div class="balloons">
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+    </div>
+    <script>
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                let confetti = document.createElement("div");
+                confetti.className = "confetti";
+                confetti.style.left = Math.random() * window.innerWidth + "px";
+                confetti.style.top = -Math.random() * 100 + "px";
+                confetti.style.backgroundColor = ["gold", "yellow", "orange"][Math.floor(Math.random() * 3)];
+                confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+        createConfetti();
+        setInterval(createConfetti, 3000);
+    </script>
+</body>
+</html>
